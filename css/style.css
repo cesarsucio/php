@@ -1,0 +1,29 @@
+header h1 {
+	float: right;
+}
+
+nav {
+	clear: both;
+	float: right;
+	margin: 1em 0 3em 0;
+}
+
+nav ul li {
+	float: left;;
+	list-style-type: none;
+	margin-left: 1em;
+}
+
+main {
+	clear: both;
+}
+
+.error {
+	color: red;
+	background-color: pink;
+}
+
+.success {
+	color: green;
+	background-color: #BDFFC5;
+}

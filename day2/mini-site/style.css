@@ -1,0 +1,6 @@
+.home, .home a,
+.about, .about a,
+.gallery, .gallery a,
+.contact, .contact a {
+	color: green;
+}
