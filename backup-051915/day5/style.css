@@ -1,0 +1,52 @@
+body {
+	background-color: cadetblue;
+	color: honeydew;
+	font-family: sans-serif;
+	font-size: 1.2em;
+	margin: 0 auto;
+	width: 40%;
+}
+
+h1 {
+  color: cyan;
+}
+
+input,
+textarea {
+	background-color: rgb(213, 233, 239);
+	height: 1.8em;
+	width: 20em;
+}
+
+label {
+	display: block;
+	margin-top: 1em;
+}
+
+form ul,
+form ol,
+form li {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+}
+
+select {
+	height: 2.2em;
+	width: 20em;
+}
+
+textarea {
+	width: 20em;
+	margin: .5em 0 1em 0;
+}
+
+.success {
+	background-color: #BEF5C1;
+	padding: 1em;
+}
+
+.error {
+	background-color: #EA9E9E;
+	padding: 1em;
+}

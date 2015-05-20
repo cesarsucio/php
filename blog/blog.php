@@ -5,14 +5,15 @@ include(SITE_PATH.'/includes/header.php');
 ?>
 	<main>
 		<?php  
-		$query = "SELECT posts.title, posts.body, posts.date, users.username, posts.post_id, categories.name
-				FROM posts, users, categories
-				WHERE posts.is_published = 1
-				AND posts.user_id = users.user_id
-				AND posts.category_id = categories.category_id
-				ORDER BY posts.date DESC
-				LIMIT 2";
-
+//only need to change the query
+//what we want: posts titles, posts body, date of post, author of post, post id, name of category order by descending
+//
+		$query = "SELECT posts.title, posts.body, posts.date, users.username, posts.post_id, categories.name 
+		    FROM posts, users, categories
+		    WHERE posts.is_published = 1
+		    AND posts.user_id = users.user_id
+		    AND posts.category_id = categories.category_id
+		    ORDER BY posts.date DESC";
 
 		//run the query
 		   $result = $db->query($query);
@@ -50,7 +51,6 @@ include(SITE_PATH.'/includes/header.php');
 			}//end while
 			$result->free(); //clears the data
 		 ?>
-		 <a href="blog.php" class="button">Read all the blog posts...</a>
 		 <?php 
 		}else{
 			echo '<h2>Sorry, no posts found</h2>';

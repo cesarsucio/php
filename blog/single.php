@@ -1,18 +1,19 @@
 <?php
 //connect to the database (includes functions and constants) 
 require('db-connect.php'); 
+$post_id = $_GET['post_id'];
+
 include(SITE_PATH.'/includes/header.php');
 ?>
 	<main>
 		<?php  
-		$query = "SELECT posts.title, posts.body, posts.date, users.username, posts.post_id, categories.name
-				FROM posts, users, categories
-				WHERE posts.is_published = 1
-				AND posts.user_id = users.user_id
-				AND posts.category_id = categories.category_id
-				ORDER BY posts.date DESC
-				LIMIT 2";
-
+		$query = "SELECT posts.title, posts.body, posts.date, users.username, posts.post_id, posts.allow_comments, categories.name 
+		FROM posts, users, categories
+		WHERE posts.is_published = 1
+		AND posts.user_id = users.user_id
+		AND posts.category_id = categories.category_id
+		AND posts.post_id = $post_id
+		LIMIT 1";
 
 		//run the query
 		   $result = $db->query($query);
@@ -23,9 +24,7 @@ include(SITE_PATH.'/includes/header.php');
 		?>	
 		<article>
 			<h2>
-				<a href="single.php?post_id=<?php echo $row['post_id'];  ?>">
 					<?php echo $row['title']; ?>
-				</a>
 			</h2>
 			<p>
 				<?php echo $row['body']; ?>
@@ -46,17 +45,16 @@ include(SITE_PATH.'/includes/header.php');
 
 			</footer>
 		</article>
+		<?php mmc_list_comments($post_id); ?>
 		<?php 
 			}//end while
 			$result->free(); //clears the data
 		 ?>
-		 <a href="blog.php" class="button">Read all the blog posts...</a>
 		 <?php 
 		}else{
-			echo '<h2>Sorry, no posts found</h2>';
+			echo '<h2>Sorry, no post found</h2>';
 			}
 		  ?>
-
 	</main>
 <?php 
 include(SITE_PATH.'/includes/sidebar.php');
