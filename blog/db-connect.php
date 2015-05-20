@@ -14,10 +14,10 @@ if($db->connect_errno > 0) {
 
 //define constants - pieces of data that will not change
 //use in links and sec attributes
-define('SITE_URL', 'http://localhost/cesar/php/blog/');
+define('SITE_URL', 'http://localhost/php/blog/');
 
 //use in includes
-define('SITE_PATH', 'C:/xampp/htdocs/cesar/php/blog/');
+define('SITE_PATH', 'C:/wamp/www/php/blog/');
 
 //control error reporting
 error_reporting(E_ALL & ~E_NOTICE);

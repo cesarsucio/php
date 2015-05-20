@@ -1,5 +1,5 @@
 <footer>
-	<small>&copy; 2015 Trish Ladd</small>
+	<small>&copy; 2015 Cesar Esparza</small>
 </footer>
 </body>
 </html>
