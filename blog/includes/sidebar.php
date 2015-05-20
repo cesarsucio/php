@@ -18,7 +18,7 @@
 				while($row = $result->fetch_assoc()){
 				 ?>
 				<li>
-					<a href="#"><?php echo $row['title']; ?></a> 
+					<a href="<?php echo SITE_URL . '/single.php?post_id=' . $row['post_id']; ?>"><?php echo $row['title']; ?></a> 
 					<?php count_comments($row['post_id']); ?>
 				</li>	
 				<?php }//end while
@@ -42,7 +42,7 @@
 				while ( $row = $result->fetch_assoc()) {
 				 ?>
 				<li>
-					<a href="#"><?php echo $row['name']; ?></a>
+					<a href="<?php echo SITE_URL . '/category.php?cat_id=' . $row['category_id']; ?>"><?php echo $row['name']; ?></a>
 					<?php count_posts_in_category($row['category_id']); ?>
 				</li>	
 				<?php } //end while 

@@ -98,5 +98,37 @@ if($result->num_rows>=1){ ?>
 
 	} //end mmc_list_comments
 
+/**
+* Clean strings to preparte them for the db
+* @param $string $input
+* @return string - clean data ready for db
+* @since DAY 10 - needed to sanitize comment form
+*/
+
+
+function clean_input($input){
+global $db;
+return mysqli_escape_string($db, strip_tags($input));              
+}
+
+/**
+* Display an array as an unordered list
+* @param array list to display
+* @return string HTML formatted list
+* @since DAY 10 - needed to validate form
+*/
+
+function cje_show_array($array){
+    if(!empty($array)){
+        $output = '<ul>';
+        foreach($array as $item){
+            $output .= '<li>' . $item . '</li>';
+        }
+        $output .= '</ul>';
+        echo $output;
+    } else {
+        return;
+    }
+}
 
 //no close

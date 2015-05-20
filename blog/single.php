@@ -3,7 +3,9 @@
 require('db-connect.php'); 
 $post_id = $_GET['post_id'];
 
-include(SITE_PATH.'/includes/header.php');
+include(SITE_PATH . '/includes/header.php');
+include(SITE_PATH . '/includes/parse-comment.php');
+
 ?>
 	<main>
 		<?php  
@@ -46,6 +48,13 @@ include(SITE_PATH.'/includes/header.php');
 			</footer>
 		</article>
 		<?php mmc_list_comments($post_id); ?>
+        <?php //show form
+                if($row['allow_comments']){
+                    include(SITE_PATH . '/includes/comment-form.php');
+                } else {
+                    echo 'Comments Closed.';
+                } //end if allow_comments
+        ?>
 		<?php 
 			}//end while
 			$result->free(); //clears the data
