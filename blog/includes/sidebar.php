@@ -1,4 +1,10 @@
 	<aside class="sidebar">
+		<form method="get" action="<?php echo SITE_URL; ?>/search.php">
+			<label for="the_phrase" class="screen-reader-text">Search</label>
+				<input type="search" name="phrase" id="the_phrase">
+				<input type="submit" value="search">
+		</form>
+		
 <?php 
 //get title, and post_id
 	$query = "SELECT title, post_id
@@ -29,20 +35,20 @@
 <?php  
 	$query = "SELECT category_id, name 
 			  FROM categories
-			  ORDER BY RAND()";
+			  ORDER BY name ASC";
 			  $result = $db->query($query);
 
 	//check for rows
 	if($result->num_rows >= 1){
 ?>
 		<section>
-			<h2>Post Categories</h2>
+			<h2><a href="<?php echo SITE_URL . 'categories.php' ?>">Post Categories</a></h2>
 			<ul>
 				<?php  //output each category as a list item
 				while ( $row = $result->fetch_assoc()) {
 				 ?>
 				<li>
-					<a href="<?php echo SITE_URL . '/category.php?cat_id=' . $row['category_id']; ?>"><?php echo $row['name']; ?></a>
+					<a href="<?php echo SITE_URL . '/categories.php?cat_id=' . $row['category_id']; ?>"><?php echo $row['name']; ?></a>
 					<?php count_posts_in_category($row['category_id']); ?>
 				</li>	
 				<?php } //end while 
@@ -60,7 +66,7 @@ $result = $db->query($query);
 if( $result->num_rows >= 1 ){ ?>
 
 	<section>
-		<h2>Links</h2>
+		<h2><a href="<?php echo SITE_URL . 'links.php'?>">Links</a></h2>
 		<ul>
 			<?php while( $row = $result->fetch_assoc() ) { ?>
 			<li>
@@ -71,6 +77,9 @@ if( $result->num_rows >= 1 ){ ?>
 			<?php } //end while
 			$result->free(); ?>
 		</ul>
+	</section>
+	<section>
+		<h2><a href="<?php echo SITE_URL . 'authors.php'?>">Authors</a></h2>
 	</section>
 
 <?php } //end if links ?>
