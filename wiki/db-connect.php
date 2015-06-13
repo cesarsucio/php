@@ -11,7 +11,7 @@ if($db->connect_errno > 0) {
 define('SITE_URL', 'http://localhost/php/wiki/');
 
 //use in includes
-define('SITE_PATH', 'C:/www/php/wiki/');
+define('SITE_PATH', 'C:/wamp/www/php/wiki/');
 
 //control error reporting
 error_reporting(E_ALL & ~E_NOTICE);

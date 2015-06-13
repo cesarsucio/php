@@ -1,5 +1,4 @@
 </main>
 <footer>
-	<h2>Some Footer Text</h2>
-	
+	<a href="#"><img src="img/hex.png"></a>
 </footer>
