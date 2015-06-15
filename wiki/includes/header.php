@@ -23,7 +23,10 @@
         } ?>
 
     <a href="<?php echo SITE_URL ?>"><img src="img/hex.png" id="logo"></a>
-	<h1>IT KnowledgeBase</h1>
+    <div id="header-headers">
+        <h1>IT KnowledgeBase</h1>
+        <h4>Your source for the latest tech info</h4>
+    </div>
     
     <?php
     echo '<h4>' . $username . '</h4>';
