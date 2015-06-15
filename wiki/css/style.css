@@ -103,6 +103,13 @@ main {
 	font-weight: 600;
 }
 
+#home article {
+    background-color: #FFF;
+    margin: 0 auto;
+    padding: 1em;
+    width: 90%;
+}
+
 main div h2 a {
 	color: #545152;
 	text-decoration: none;
