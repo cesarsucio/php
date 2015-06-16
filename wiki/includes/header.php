@@ -1,25 +1,27 @@
 <?php session_start(); ?>
+
 <!doctype html>
 <html>
 	<head>
 		<meta charset="utf=8">
 		<meta name="viewport" content="width=device-width, initial-scale=1"></meta>
-		<title><?php echo $row['title']; ?></title>
+		<title><?php echo $row['article_title']; ?></title>
         <link href="css/reset.css" rel="stylesheet">
         <link href="css/style.css" rel="stylesheet">
+        <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+        <script src="js/scripts.js"></script>
 	</head>
 </html>
 <header>
 <?php
 	$user_id = $_SESSION['user_id'];
 	$query = "user_id, username, user_pic
-           FROM users
-	       WHERE user_id = $user_id";
+                FROM users
+	           WHERE user_id = $user_id";
     $result = $db->query($query);
     
     if($result->num_rows > 0){
-	$cells = $result->fetch_assoc();
-    $username = $cells['username'];
+	   echo $user_id;
         } ?>
 
     <a href="<?php echo SITE_URL ?>"><img src="img/hex.png" id="logo"></a>

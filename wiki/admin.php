@@ -10,7 +10,7 @@ session_start();
 <?php
 //redirect to articles page if logged in	
 if($_SESSION['user_id'] != ''){
-	header('Location:articles.php');
+	//header('Location:index.php');
 }	
 	
 //parse the form if it was submitted
@@ -24,11 +24,11 @@ if( $_POST['did_login'] ):
 
 	if($valid):
 		//check for the correct credentials 
-		$query = "SELECT user_id 
-				  FROM users
-				  WHERE username = '$username'
-				  AND user_password = '$password'
-				  LIMIT 1";
+		echo $query = "SELECT user_id 
+				        FROM users
+				        WHERE username = '$username'
+                        AND user_password = '$password'
+                        LIMIT 1";
 		//run it
 		$result = $db->query($query);
 		//if one row is found, success! log them in
@@ -48,14 +48,14 @@ if( $_POST['did_login'] ):
 			$_SESSION['user_id'] = $user_id;
 
 			//store the key in the db
-			$query_update = "UPDATE users
-							SET login_key = '$key' 
-							WHERE user_id = $user_id
-							LIMIT 1";
+			echo $query_update = "UPDATE users
+							     SET login_key = '$key' 
+							     WHERE user_id = $user_id
+							     LIMIT 1";
 			$result_update = $db->query($query_update);
 
 			//redirect to articles page
-			header('Location:articles.php');
+			header('Location:index.php');
 		else:
 			//ERROR
 			$message = 'Incorrect login info. Try again.';
@@ -67,12 +67,10 @@ if( $_POST['did_login'] ):
 endif; //end of parser
 
 //if the user returns here to log out, destroy all sessions and cookies
-if( $_GET['logout'] ):
+if( $_GET['logout'] ){
 	session_destroy();
 
-	//remove the key from the db with the UPDATE statement
-    
-	
+	//remove the key from the db with the UPDATE statement	
 	//destroy the key
 	unset($_SESSION['key']);
 	setcookie( 'key', '', time() - 9999999 );
@@ -82,7 +80,7 @@ if( $_GET['logout'] ):
 	unset($_SESSION['user_id']);
 	setcookie( 'user_id', '', time() - 9999999 );
 
-endif;
+}
 
 //if the user returns to this page and they still have a valid cookie, use it to re-create the session
 if( $_SESSION['key'] == '' ){
@@ -94,7 +92,7 @@ if( $_SESSION['user_id'] == '' ){
 
 //if the user views this page and is logged in, redirect them to admin
 if( $_SESSION['key'] == '' AND $_SESSION['user_id'] == '' ):
-	header('Location:articles.php');
+	//header('Location:articles.php');
 endif;
 ?>
 	<h1>Log In</h1>

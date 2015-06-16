@@ -1,8 +1,15 @@
 <aside>	
 	<ul>
-		<li><a href="<?php echo SITE_URL; ?>"><img src="<?php echo SITE_URL ?>img/home.png" alt="Home"></a></li>
-		<li><a href="<?php echo SITE_URL . 'categories.php'; ?>" alt="Categories"><img src="<?php echo SITE_URL ?>img/library.png" alt="Library"></a></li>
-		<!-- <li><a href=""><img src="<?php echo SITE_URL ?>img/cabinet.png" alt="Shelf"></a></li> -->
+		<li><a href="<?php echo SITE_URL; ?>"><img src="img/home.png"></a></li>
+		<li><a href="categories.php"><img src="img/library.png"></a></li>
+        <li id="hamburger"><a href=""><img src="img/menu.png"></a>
+            <ul id="submenu">
+                <li><a href="">My Profile</a></li>
+                <li><a href="">My Articles</a></li>
+                <li><a href="">Sub 3</a></li>
+            </ul>
+        </li>
+		<li><a href=""></a></li>
 	</ul>
     
     <form method="get" action="<?php echo SITE_URL; ?>search.php">

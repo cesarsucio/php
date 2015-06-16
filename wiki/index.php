@@ -2,11 +2,10 @@
 require('db-connect.php');
 include('includes/header.php');
 include('includes/sidebar.php');
-session_start();
 ?>
 
 <main>
-
+    
 	<div id="home">
         <article>
             <h2>The IT KnowledgeBase</h2>

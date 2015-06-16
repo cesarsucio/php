@@ -11,10 +11,10 @@ $page_number = 1; //default page to start with
 $phrase = $_GET['phrase'];
 ?>
 
-<main>
+<main id="search_results">
 <?php
 //get all the published posts that match the search phrase
-echo $query = "
+$query = "
 	SELECT article_id, article_title, article_body
 	FROM articles
 	WHERE is_published = 1
@@ -54,10 +54,10 @@ Showing page <?php echo $page_number;?> of <?php echo $total_pages ?></p>
 	while($row = $result_modified->fetch_assoc()){?>
 	<article>
 		<h2><a href="<?php echo SITE_URL ?>article.php?article_id=<?php echo $row['article_id']; ?>">
-		<?php echo $row['title']; ?></a>
+		<?php echo $row['article_title']; ?></a>
 		</h2>
 		<p>
-			<?php echo substr(strip_tags($row['body']), 0, 100); ?>&hellip;
+			<?php echo substr(strip_tags($row['article_body']), 0, 100); ?>&hellip;
 		</p>
 	</article>
 <?php	

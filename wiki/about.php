@@ -1,5 +1,4 @@
 <?php 
-require('db-connect.php');
 include('includes/header.php');
 include('includes/sidebar.php'); 
 ?>
@@ -29,10 +28,5 @@ $category_id = $row['category_id'];
 	<h2><?php echo $title; ?></h2>
 	<p><?php echo $body; ?></p>	
 </div>
-
-
-
-	
-</main>
 
 <?php include('includes/footer.php') ?>

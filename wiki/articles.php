@@ -16,10 +16,11 @@ $query = "	SELECT articles.article_id, articles.date_posted, articles.article_ti
 			FROM articles, users
 			WHERE users.user_id = $user_id
 			AND articles.user_id - users.user_id";
-		
 		$result = $db->query($query);
+
+    if($user_id != ''){
 		$cells = $result->fetch_assoc();
-		
+            }
 		if($result->num_rows > 0){
 		?>
 			<h2>Current User: <span class="username"><?php echo $cells['username']; ?></span></h2>
