@@ -16,4 +16,10 @@ function convTimestamp($date){
 	return $stamp;
 }
 
-?>
+function echoUsername($user_id){
+	if($user_id != ''){
+		echo '<img src="img/profile_min.png">';
+	echo '<h4>Hello, <span>' . $user_id . '</span>!</h4>';
+	
+	}
+}

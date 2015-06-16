@@ -62,6 +62,7 @@ $valid = true;
 		$result = $db->query($query);
 		if($db->affected_rows == 1){
 			$message = 'SUCCESSFULLY REGISTERED!!!';
+			header('Location:index.php');
 		}
 	}
 

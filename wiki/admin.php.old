@@ -1,7 +1,34 @@
-<?php
-	include('includes/header.php');
-	include('includes/sidebar.php');
+<?php 
+require('db-connect.php');
+include('includes/header.php');
+include('includes/sidebar.php');
+session_start();
+?>
 
+<main>
+
+<?php
+	
+if( $_GET['logout'] ){
+	session_destroy();
+
+	//remove the key from the db with the UPDATE statement	
+	//destroy the key
+	unset($_SESSION['key']);
+	setcookie( 'key', '', time() - 9999999 );
+
+
+	//destroy the user_id
+	unset($_SESSION['user_id']);
+	setcookie( 'user_id', '', time() - 9999999 );
+
+}	
+	
+//redirect to articles page if logged in	
+if($_SESSION['user_id'] != ''){
+	header('Location:categories.php');
+}	
+	
 //parse the form if it was submitted
 if( $_POST['did_login'] ):
 	//extract and clean the data
@@ -11,30 +38,19 @@ if( $_POST['did_login'] ):
 	//validate
 	$valid = true;
 
-	//test to see if username is the wrong length (not between 5 - 20)
-	if( strlen( $username ) < 5 OR strlen( $username ) > 20 ):
-		$valid = false;
-	endif;
-
-	//test to see if password is wrong length (minimum 8)
-	if( strlen( $password ) < 8 ):
-		$valid = false;
-	endif;
-
-
 	if($valid):
 		//check for the correct credentials 
 		$query = "SELECT user_id 
-				  FROM users
-				  WHERE username = '$username'
-				  AND user_password = sha1('$password')
-				  LIMIT 1";
+				        FROM users
+				        WHERE username = '$username'
+                        AND user_password = '$password'
+                        LIMIT 1";
 		//run it
 		$result = $db->query($query);
 		//if one row is found, success! log them in
-		if( $result->num_rows == 1 ):
+		if( $result->num_rows > 0 ):
 			//SUCCESS!
-			$message = 'Success! You are now logged in.';
+			$message = 'Login Successful';
 			//log the user in for 1 week - store their user_id and security key
 			$key = sha1( microtime() . 'dsaf9o743kylfxdz8o5' );
 			setcookie( 'key', $key, time() + 60 * 60 * 24 * 7 );
@@ -49,13 +65,13 @@ if( $_POST['did_login'] ):
 
 			//store the key in the db
 			$query_update = "UPDATE users
-							SET login_key = '$key' 
-							WHERE user_id = $user_id
-							LIMIT 1";
+							     SET login_key = '$key' 
+							     WHERE user_id = $user_id
+							     LIMIT 1";
 			$result_update = $db->query($query_update);
 
-			//redirect to admin panel
-			header('Location:index.php');
+			//redirect to articles page
+			header('categories:index.php');
 		else:
 			//ERROR
 			$message = 'Incorrect login info. Try again.';
@@ -67,20 +83,6 @@ if( $_POST['did_login'] ):
 endif; //end of parser
 
 //if the user returns here to log out, destroy all sessions and cookies
-if( $_GET['logout'] ){
-	session_destroy();
-
-	//TODO:  remove the key from the db with the UPDATE statement
-	
-	//destroy the key
-	unset($_SESSION['key']);
-	setcookie( 'key', '', time() - 9999999 );
-
-
-	//destroy the user_id
-	unset($_SESSION['user_id']);
-	setcookie( 'user_id', '', time() - 9999999 );
-}
 
 //if the user returns to this page and they still have a valid cookie, use it to re-create the session
 if( $_SESSION['key'] == '' ){
@@ -90,9 +92,11 @@ if( $_SESSION['user_id'] == '' ){
 	$_SESSION['user_id'] = $_COOKIE['user_id'];
 }
 
+//if the user views this page and is logged in, redirect them to admin
+if( $_SESSION['key'] == '' AND $_SESSION['user_id'] == '' ):
+	header('Location:categories.php');
+endif;
 ?>
-<main>
-	
 	<h2>Log In</h2>
 
 	<?php 
@@ -113,7 +117,4 @@ if( $_SESSION['user_id'] == '' ){
 		<input type="hidden" name="did_login" value="true"> 
 	</form>
 
-</main>
-<?php 
-	include('includes/footer.php');
-?>
+<?php include('includes/footer.php'); ?>

@@ -1,4 +1,12 @@
-<?php session_start(); ?>
+<?php 
+    session_start();
+    include('db-connect.php');
+    
+    //if the user returns here to log out, destroy all sessions and cookies
+        if( $_GET['logout'] ){
+	      echo 'LOGOUT';
+            }
+?>
 
 <!doctype html>
 <html>
@@ -8,37 +16,24 @@
 		<title><?php echo $row['article_title']; ?></title>
         <link href="css/reset.css" rel="stylesheet">
         <link href="css/style.css" rel="stylesheet">
-        <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
-        <script src="js/scripts.js"></script>
 	</head>
 </html>
 <header>
-<?php
+<?php 
 	$user_id = $_SESSION['user_id'];
-	$query = "user_id, username, user_pic
+	$query = "SELECT user_id, username
                 FROM users
-	           WHERE user_id = $user_id";
+	           WHERE user_id = '$user_id'
+               LIMIT 1";
     $result = $db->query($query);
-    
-    if($result->num_rows > 0){
-	   echo $user_id;
-        } ?>
-
+    $row = $result->fetch_assoc();
+    ?>
     <a href="<?php echo SITE_URL ?>"><img src="img/hex.png" id="logo"></a>
     <div id="header-headers">
         <h1>IT KnowledgeBase</h1>
         <h4>Your source for the latest tech info</h4>
+        <h4><?php echoUsername($row['username']);
+        ?></h4>
     </div>
     
-    <?php
-    echo '<h4>' . $username . '</h4>';
-		if($result->num_rows >= 1){
-            
-            echo '<h4><a href="' . $SITE_URL . 'admin.php?logout"' . 'Logout</a></h4>';
-                
-			} 
-	?>
-	
-	
-
 </header>
