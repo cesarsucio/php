@@ -2,6 +2,7 @@
 require('db-connect.php');
 include('includes/header.php');
 include('includes/sidebar.php'); 
+session_start();
 ?>
 
 <main>
