@@ -1,0 +1,74 @@
+<p>This article assumes you are using the GRUB boot menu, and not LILO.  This has been tested on Fedora Core 8, 9 and 10, Ubuntu 8 and 9 series, OpenSUSE 10 and 11 series, and SLES 9.  It seems to work on all Kernels 2.4 and above.  It may work on lesser kernel versions, but the author has not tested this.</p>
+
+<p>
+So you forgot your Linux Root account password eh?  Or maybe your company's previous IT manager left without leaving passwords behind to your Linux server? For many users, including IT professionals, this is a common occurrence.  Rest assured,  It's really easy to reset said password in just such a case.  This can be done by booting into single user mode (Runlevel 1).</p>
+
+<p>*Note, if you use Fedora Core 10, you may need to hold down the "shift" key on the Fedora loading screen (The one with the 3 different colors of blue loading bar) until you see the GRUB menu.</p>
+
+Step 1)  If you have a graphical GRUB menu (Such as with openSUSE or Mandriva), you will want to hit the "esc" key at the boot menu.  This will prompt you with a message box saying you are leaving the graphical boot menu and starting text mode interface.  Hit OK.  Otherwise you may already be in the text mode interface.  In which case, skip to step 2.
+
+Step 2) Once in text mode, highlight the default boot option (you want to reset the Root password for) and hit "e" to Edit the commands before booting.
+
+Step 3) Highlight the line that starts with "kernel", press "e" again to edit this entry. 
+
+Step 4) At the end of the line, type the word "single". Mine looks something like this:
+kernel /boot/vmlinuz-2.6.25.20-0 ... splash=silent showopts vga=0x314 single
+
+Select all
+ 
+Open in new window
+Hit "enter" to save, then hit "esc" to go back to the previous screen.  
+
+Step 5) Still with kernel highlighted, Press "b" to boot.  Your system will boot without it's shiny graphical boot sequence (unless the vga=xxx option is set, in which case you will have a graphical boot).  
+
+Step 6) If you use openSUSE, you will be presented with the following prompt:
+Give root password for login:
+
+Select all
+ 
+Open in new window
+Type new password.
+
+Other operating systems may put you right in the command prompt with root privileges.  In which case you will need to type the following to change the root password:
+passwd
+
+Select all
+ 
+Open in new window
+type your new password and confirm it by typing it a second time if it asks you.
+
+If you are using (K)Ubuntu 9.04 (Jaunty Jackalope and in some cases, earlier versions of Ubuntu) and you follow the above steps, you may find a known bug when presented with a text menu in which you may not be able to select anything, but instead can see all your key strokes as escape characters.  In such a case you may try this work around:
+
+Instead of typing the word "single" as stated in step 4 above, type the following:
+init=/bin/bash
+
+Select all
+ 
+Open in new window
+ 
+Using Kubuntu 9.04, mine would look like this:
+kernel /boot/vmlinuz-2.6.28-11-generic ... part2 ro quite splash vga=0x314 init=/bin/bash
+
+Select all
+ 
+Open in new window
+Hit "enter" to save, "esc" to go back to the boot screen, and "b" to boot.  You will be presented with a prompt that looks like the following:
+root@(none):/#
+
+Select all
+ 
+Open in new window
+Once at the prompt, type the following:
+mount -t /proc
+mount -o remount,rw /
+passwd
+
+Select all
+ 
+Open in new window
+type the new password   (hit enter)
+retype for confirmation  (hit enter)
+You should now see a "password successfully changed" message.  
+Reboot your machine and login.
+
+You might ask, "Well, if it's that easy to reset Root's password, can't someone reset mine?"  The answer is YES!...Never give easy physical access to a data-sensitive system!  You can password protect the GRUB boot menu, and even the BIOS to prevent people from performing these steps, but that is not covered here.

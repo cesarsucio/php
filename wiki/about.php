@@ -4,29 +4,19 @@ include('includes/sidebar.php');
 ?>
 
 <main>
-<?php
+	<div id="home">
+        <article>
+            <h2>The IT KnowledgeBase</h2>
+                <p>Knowledge bases are commonly used to complement a help desk. Similar to an FAQ (frequently asked questions), a knowledge base is designed to organize and present your most common customer questions or problems and an explanation of how to solve them.  A knowledge base usually stores troubleshooting information, how-to articles, user manuals, and answers to frequently asked questions.</p>
 
-$article_id = 4;
-$query = "	SELECT article_id, date_posted, article_title, article_body, user_id, is_published, allow_comments, category_id
-			FROM articles
-			WHERE article_id = $article_id
-		";
-		
-$result = $db->query($query);
-$row = $result->fetch_assoc();
+                <p>Typically, a search engine is used to locate information in the system, or users may browse through a custom classification scheme.</p>
 
-$date_posted = $row['date_posted'];
-$title = $row['article_title'];
-$body = $row['article_body'];
-$user_id = $row['user_id'];
-$is_published = $row['is_published'];
-$allow_comments = $row['allow_comments'];
-$category_id = $row['category_id'];
+                <h3>How Businesses Use The Knowledge Base</h3>
 
-?>
-<div id="about_section">
-	<h2><?php echo $title; ?></h2>
-	<p><?php echo $body; ?></p>	
-</div>
+                <p>Instead of answering the same question over and over, businesses save time and money by directing customers to a online knowledge base before having them submit or open a ticket or call support directly.</p>
+
+                <p>A knowledge base can also keep customers updated with news, announcements, release information, and product updates.</p>
+	   </article>
+    </div><!-- end .home -->
 
 <?php include('includes/footer.php') ?>

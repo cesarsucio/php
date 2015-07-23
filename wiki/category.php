@@ -4,7 +4,7 @@ include('includes/header.php');
 include('includes/sidebar.php'); 
 ?>
 
-<main>
+<main id="category_page">
 	<?php 
 		$category_id = $_GET['category_id'];
 		$query = "		SELECT category_name
@@ -32,7 +32,7 @@ include('includes/sidebar.php');
 
 					<article>
 						<h3><a href="article.php?article_id=<?php echo $row['article_id']; ?>">
-						<?php echo $row['article_title']; ?></a></h3>
+						<?php echo $row['article_title']; ?></a></h3></article>
 					<?php } //end while
 				$result->free();
 			 } else {

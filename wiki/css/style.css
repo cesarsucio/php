@@ -210,6 +210,19 @@ main#search_results article {
     margin: 0 0 1em 0;
 }
 
+#category_page article {
+	margin-bottom: 2px;
+}
+
+#category_page article:hover {
+	background-color: #E9E8E8;
+	border: 1px solid #545152;
+}
+
+#category_page article a {
+	text-decoration: none;
+}
+
 span.username:first-letter {
 	text-transform: uppercase;
 }
@@ -254,6 +267,14 @@ footer {
 
 footer a {
     float: left;
+}
+
+.about {
+	margin: .4em;
+}
+
+.about a {
+	color: blue;
 }
 
 #footer-headers {

@@ -112,6 +112,7 @@ if( $_SESSION['user_id'] == '' ){
 		<input type="submit" value="Log In">
 		<input type="hidden" name="did_login" value="true"> 
 	</form>
+	<h4><a href="register.php">Or Register for an account</a></h4>
 
 </main>
 <?php 
